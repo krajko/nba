@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class TeamsController extends Controller
 {
     public function index() {
-        $teams = Team::with('players')->get();
+        $teams = Team::with('players')
+        ->with('comments')->get();
 
         return view('teams.index', compact('teams'));
     }

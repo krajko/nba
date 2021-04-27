@@ -6,6 +6,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -17,6 +18,7 @@ class AuthController extends Controller
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
+        event (new Registered($user));
 
         auth()->login($user);
         return redirect('/');

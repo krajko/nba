@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\PlayersController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\EmailVerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +19,13 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', [TeamsController::class, 'index'])->middleware('auth');
-Route::get('/teams/{team}', [TeamsController::class, 'show'])->name('team')->middleware('auth');
+Route::get('/', [TeamsController::class, 'index'])->middleware('verified');
+Route::get('/teams/{team}', [TeamsController::class, 'show'])->name('team')->middleware('verified');
 
-Route::get('/players', [PlayersController::class, 'index'])->middleware('auth');
-Route::get('/players/{player}', [PlayersController::class, 'show'])->name('player')->middleware('auth');
+Route::post('/teams/{team}/comment', [CommentsController::class, 'store'])->name('comment');
+
+Route::get('/players', [PlayersController::class, 'index'])->middleware('verified');
+Route::get('/players/{player}', [PlayersController::class, 'show'])->name('player')->middleware('verified');
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [AuthController::class, 'getRegister']);
@@ -33,5 +37,9 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
+Route::get('/email/verify', [EmailVerificationController::class, 'notice'])->middleware('auth')->name('verification.notice');
 
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'handle'])->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 

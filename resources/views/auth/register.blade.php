@@ -4,54 +4,61 @@
 
 @section('content')
 
-    <div class="container">
-        <form action="/register" method="post">
-            @csrf
+    <div class="container" style="max-width: 480px;">
+        <div class="row mt-5 text-center text-dark">
+            <h1>Register</h1>
+            <hr>
+        </div>
 
-            <input 
-                type="text" 
-                class="form-control my-3 @error('name') is-invalid @enderror"
-                name="name" 
-                placeholder="Name">
+        <div class="row text-center">
+            <form action="/register" method="post">
+                @csrf
 
-            @error('name')
-                <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
+                <input 
+                    type="text" 
+                    class="form-control my-3 @error('name') is-invalid @enderror"
+                    name="name" 
+                    placeholder="Name">
 
-            <input 
-                type="email"    
-                class="form-control my-3 @error('email') is-invalid @enderror"
-                name="email" 
-                placeholder="Email">
+                @error('name')
+                    <div class="alert alert-danger"> {{ $message }}</div>
+                @enderror
 
-            @error('email')
-                <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
+                <input 
+                    type="email"    
+                    class="form-control my-3 @error('email') is-invalid @enderror"
+                    name="email" 
+                    placeholder="Email">
 
-
-            <input 
-                type="password" 
-                class="form-control my-3 @error('password') is-invalid @enderror"
-                name="password" 
-                placeholder="Password">
-
-            @error('password')
-                <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
+                @error('email')
+                    <div class="alert alert-danger"> {{ $message }}</div>
+                @enderror
 
 
-            <input 
-                type="password" 
-                class="form-control my-3 @error('password') is-invalid @enderror"
-                name="password_confirmation" 
-                placeholder="Confirm password">
+                <input 
+                    type="password" 
+                    class="form-control my-3 @error('password') is-invalid @enderror"
+                    name="password" 
+                    placeholder="Password">
 
-            @error('password_confirmation')
-                <div class="alert alert-danger"> {{ $message }}</div>
-            @enderror
+                @error('password')
+                    <div class="alert alert-danger"> {{ $message }}</div>
+                @enderror
 
-            <button class="btn btn-outline-warning" type="submit">Submit</button>
-        </form>
+
+                <input 
+                    type="password" 
+                    class="form-control my-3 @error('password') is-invalid @enderror"
+                    name="password_confirmation" 
+                    placeholder="Confirm password">
+
+                @error('password_confirmation')
+                    <div class="alert alert-danger"> {{ $message }}</div>
+                @enderror
+
+                <button class="btn btn-outline-danger my-3" type="submit">Submit</button>
+            </form>
+        </div>
     </div>
 
 @endsection

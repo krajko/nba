@@ -17,7 +17,7 @@
             }
         </style>
     </head>
-    <body>
+    <body class="bg-light">
         @include('navbar')
         
         @yield('content')
