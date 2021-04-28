@@ -15,6 +15,7 @@ class Teams extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->string('name');
             $table->string('email');
             $table->string('address');

@@ -37,7 +37,15 @@
         
         <div class="row my-5 d-flex justify-content-between">
 
-            <h5 class="mb-3">{{ $team->comments->count() }} Comments</h5>
+                <h5 class="mb-3">
+                    @if ($team->comments->count() == 1)
+                        1 Comment
+                    @else
+                        {{ $team->comments->count() }} Comments
+                    @endif
+                </h5>
+                <hr>
+                
 
             <form class="mt-3" action="{{ route('comment', [ 'team' => $team ]) }}" method="post">
             @csrf
@@ -62,9 +70,12 @@
 
             <ul class="list-unstyled my-1">
                 @forelse($team->comments as $comment)
-                    <li class="row my-4 h5">
-                        <div class="py-0 my-1 h6">
-                            {{ $comment->content }}
+                    <li class="row my-4">
+                        <div class="py-0 my-0">
+                            <h6 class="my-0 py-0"><strong> {{ $comment->user->name }} </strong></h6>
+                        </div>
+                        <div class="py-0 my-1">
+                            <p class="my-0"> {{ $comment->content }} </p>
                         </div>
                         <div class="py-0 text-muted" style="font-size: .7rem;">
                             <em>{{ $comment->created_at }}</em>

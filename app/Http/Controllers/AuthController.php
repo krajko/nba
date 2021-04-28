@@ -21,7 +21,7 @@ class AuthController extends Controller
         event (new Registered($user));
 
         auth()->login($user);
-        return redirect('/');
+        return redirect('/email/verify');
     }
 
     public function getLogin() {

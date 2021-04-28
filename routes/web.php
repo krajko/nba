@@ -22,7 +22,7 @@ use App\Http\Controllers\EmailVerificationController;
 Route::get('/', [TeamsController::class, 'index'])->middleware('verified');
 Route::get('/teams/{team}', [TeamsController::class, 'show'])->name('team')->middleware('verified');
 
-Route::post('/teams/{team}/comment', [CommentsController::class, 'store'])->name('comment');
+Route::post('/teams/{team}/comment', [CommentsController::class, 'store'])->name('comment')->middleware('verified');
 
 Route::get('/players', [PlayersController::class, 'index'])->middleware('verified');
 Route::get('/players/{player}', [PlayersController::class, 'show'])->name('player')->middleware('verified');
