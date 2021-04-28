@@ -6,19 +6,13 @@
 
 <div class="container my-5" style="max-width: 860px;">
     <div class="row mb-2">
-        <h1><strong>
-            @if (session()->exists('status'))
-                {{ session()->get('status') }}
-            @else
-                News
-            @endif
-        </strong></h1>
+        <h1><strong>{{ $team->name }} News</strong></h1>
         <hr>
     </div>
 
     <div class="d-flex flex-wrap justify-content-between">
 
-        @foreach ($news as $article)
+        @foreach ($team->news as $article)
         <div class="col-6 my-3 mx-auto" style="max-width: 400px">
 
             <div class="card">
@@ -31,7 +25,7 @@
                             <strong>{{ $article->user->name }}</strong> 
                         </a>
                     </p>
-                    <p class="card-text"> {{ Str::limit($article->content, 150) }} </p>
+                    <p class="card-text my-0"> {{ Str::limit($article->content, 150) }} </p>
 
                     <div class="my-2">
                         @foreach($article->teams as $team)
@@ -56,9 +50,6 @@
 
     <div class="row">
     
-        <div class="pagination text-center">
-            {{ $news->links() }}
-        </div>
     </div>
 
 </div>

@@ -46,4 +46,11 @@ Route::post('/email/verification-notification', [EmailVerificationController::cl
 
 Route::get('/news', [NewsController::class, 'index']);
 
+Route::get('/news/create', [NewsController::class, 'getForm'])->middleware('verified');
+Route::post('/news/create', [NewsController::class, 'store'])->middleware('verified');
+
+Route::get('/news/team/{team}', [NewsController::class, 'show_team'])->name('team_news');
+
 Route::get('/news/{article}', [NewsController::class, 'show']);
+
+
