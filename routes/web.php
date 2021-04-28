@@ -7,6 +7,7 @@ use App\Http\Controllers\PlayersController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,6 @@ Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'ha
 
 Route::post('/email/verification-notification', [EmailVerificationController::class, 'resend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+Route::get('/news', [NewsController::class, 'index']);
+
+Route::get('/news/{article}', [NewsController::class, 'show']);

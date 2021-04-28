@@ -13,6 +13,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/players">Players</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/news">News</a>
+                </li>
             </ul>
 
             <ul class="navbar-nav ml-auto">
