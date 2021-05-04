@@ -4,17 +4,17 @@
 
 @section('content')
 
-    <div class="container my-5" style="max-width: 720px;">
+    <div class="container my-4" style="max-width: 720px;">
 
-        <div class="row my-4">
+        <div class="row my-3">
             <h1><strong>{{ $team->name }}</strong></h1>
             <hr>
-            <div class="row">
+            <div class="row mt-1">
                 <div class="col">
-                    <p class="text-muted">{{ $team->address }}, {{ $team->city }}</p>
+                    <p class="text-muted"> {{ $team->email }} </p>
                 </div>
-                <div class="col">
-                    <p class="text-muted text-end"> <em>{{ $team->email }}</em></p>
+                <div class="col ">
+                    <p class="text-muted text-end"> <em> {{ $team->address }}, {{ $team->city }} </em> </p>
                 </div>
             </div>
         </div>
@@ -29,15 +29,15 @@
                 </div>
 
                 <div>
-                    <a class="btn btn-danger px-3" href="{{ route('player', ['player' => $player]) }}">Info</a>
+                    <a class="btn btn-danger px-3" href="{{ route('player', ['player' => $player]) }}">Player info »</a>
                 </div>
             </div>
             @endforeach
         </div>
         
-        <div class="row my-5 d-flex justify-content-between">
+        <div class="row my-4 d-flex justify-content-between">
 
-                <h5 class="mb-3">
+                <h5 class="">
                     @if ($team->comments->count() == 1)
                         1 Comment
                     @else
@@ -78,7 +78,10 @@
                             <p class="my-0"> {{ $comment->content }} </p>
                         </div>
                         <div class="py-0 text-muted" style="font-size: .7rem;">
-                            <em>{{ $comment->created_at }}</em>
+                            <em>
+                                {{ $comment->created_at->format('d/m/Y') }}
+                             at {{ $comment->created_at->format('h:m:sa') }}
+                            </em>
                         </div>
                     </li>
                 @empty

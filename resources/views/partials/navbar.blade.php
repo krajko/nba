@@ -19,7 +19,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/news/create">Post article</a>
+                    <a class="nav-link" href="/news/create">Publish article</a>
                 </li>
             </ul>
 
@@ -37,6 +37,12 @@
             </ul>
 
             @else
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/news">News</a>
+                </li>
+            </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/register">Register</a>

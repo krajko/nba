@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="container my-5" style="max-width: 720px;">
+    <div class="container my-4" style="max-width: 720px;">
         <div class="row mb-2">
             <h1><strong>Players</strong></h1>
             <hr>
@@ -21,7 +21,7 @@
                </div>
 
                <div>
-                    <a class="btn btn-danger px-3" href="{{ route('player', [ 'player' => $player->id ]) }}">Info</a>
+                    <a class="btn btn-danger px-3" href="{{ route('player', [ 'player' => $player->id ]) }}">Info »</a>
                </div>
             </div>
             @endforeach

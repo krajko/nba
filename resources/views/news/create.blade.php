@@ -4,9 +4,9 @@
 
 @section('content')
 
-<div class="container my-5" style="max-width:840px;">
+<div class="container my-4" style="max-width: 720px;">
     <div class="row">
-        <h1><strong>Post a news article</strong></h1>
+        <h1><strong>Publish article</strong></h1>
         <hr>
     </div>        
 
@@ -46,8 +46,8 @@
                     autocomplete="off">
                 <label 
                     for="btn-{{ $loop->iteration }}"
-                    class="btn btn-sm btn-outline-danger mb-1">
-                    {{ $team->name }}
+                    class="btn btn-sm rounded-pill btn-outline-danger mb-1">
+                    <strong>{{ $team->name }}</strong>
                 </label>
             <!-- </div> -->
             @endforeach

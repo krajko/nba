@@ -6,15 +6,17 @@ use Illuminate\Http\Request;
 
 use App\Models\News;
 use App\Models\Team;
+
 use App\Http\Requests\CreateNewsRequest;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Session;
 
 class NewsController extends Controller
 {
-    public function index(Request $request) {
-        $news = News::with('user')
-                    ->with('teams')
+    public function index() {
+        $news = News::with(['user', 'teams'])  
                     ->orderBy('created_at', 'desc')
-                    ->paginate(6);
+                    ->paginate(5);
 
         // return $news;
 
@@ -26,10 +28,11 @@ class NewsController extends Controller
         return view('news.show', compact('article'));
     }
 
-    public function show_team(Team $team) {
-        $team->load('news')->paginate(6);
+    public function team_news($teamName) {
+        $team = Team::where('name', $teamName)->firstOrFail();
+        $news = $team->news()->paginate(5);
 
-        return view('news.show_team', compact('team'));
+        return view('news.team_news', compact('news', 'team'));
     }
 
     public function getForm() {
@@ -41,9 +44,9 @@ class NewsController extends Controller
         $data = $request->validated();
 
         $newArticle = auth()->user()->news()->create($data);
-        $newArticle->teams()->sync($data['teams']);
+        $newArticle->teams()->attach(Arr::get($data, 'teams', []));
 
-        $request->session()->flash('status', 'Thank you for publishing an article on www.nba.com.');
+        Session::flash('status', 'Thank you for publishing an article on www.nba.com.');
 
         return redirect('/news');
     }

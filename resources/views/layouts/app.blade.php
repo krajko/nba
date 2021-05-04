@@ -18,9 +18,16 @@
         </style>
     </head>
     <body class="bg-light">
-        @include('navbar')
+        @include('partials.navbar')
         
-        @yield('content')
+        <div class="row gx-0">
+            <div class="col-2">
+                @include('partials.sidebar')
+            </div>
+            <div class="col-10">
+                @yield('content')
+            </div>
+        </div>
 
     </body>
 

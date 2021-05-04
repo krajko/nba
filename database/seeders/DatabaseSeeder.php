@@ -18,9 +18,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Team::factory(10)->hasPlayers(10)->create();
         User::factory(10)->create();
-        Comment::factory(30)->create();
-        News::factory(20)->create();    
+
+        // // populate teams
+        Team::factory(30)->hasPlayers(15)->create();
+
+        // //populate news
+        News::factory(50)->create();
+
+        // populate pivot table
+        $teams = Team::all();
+        News::all()->each(function ($news) use ($teams) {
+            $news->teams()->attach(
+                $teams->random( rand(1, 5) )->pluck('id')->toArray()
+            );
+        });
+
+        Comment::factory(100)->create();
     }
 }

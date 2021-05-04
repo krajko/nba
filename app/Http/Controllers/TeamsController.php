@@ -9,7 +9,9 @@ class TeamsController extends Controller
 {
     public function index() {
         $teams = Team::with('players')
-        ->with('comments')->get();
+        ->with('comments', function ($qb) {
+            return $qb->orderBy('created_at', 'desc');
+        })->get();
 
         return view('teams.index', compact('teams'));
     }
